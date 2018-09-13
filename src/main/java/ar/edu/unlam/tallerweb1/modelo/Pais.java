@@ -18,9 +18,16 @@ public class Pais {
 	private Integer habitantes;
 	private String idioma;
 	private String capital;
+	@ManyToOne
+	private Continente continente;
 	
 	
-	
+	public Continente getContinente() {
+		return continente;
+	}
+	public void setContinente(Continente continente) {
+		this.continente = continente;
+	}
 	public String getNombre() {
 		return nombre;
 	}
