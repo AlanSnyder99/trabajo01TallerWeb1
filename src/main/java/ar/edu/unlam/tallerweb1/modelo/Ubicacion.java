@@ -11,19 +11,19 @@ public class Ubicacion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String longitud;
-	private String latitud;
+	private Integer longitud;
+	private Integer latitud;
 	
-	public String getLongitud() {
+	public Integer getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(String longitud) {
+	public void setLongitud(Integer longitud) {
 		this.longitud = longitud;
 	}
-	public String getLatitud() {
+	public Integer getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(String latitud) {
+	public void setLatitud(Integer latitud) {
 		this.latitud = latitud;
 	}
 	
