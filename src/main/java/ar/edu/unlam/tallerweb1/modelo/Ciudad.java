@@ -5,23 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Ciudad {
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Pais pais;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Ubicacion ubicacionGeografica;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private Pais pais;
+	
 	
 	public String getNombre() {
 		return nombre;
@@ -35,12 +31,7 @@ public class Ciudad {
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
-	public Ubicacion getUbicacionGeografica() {
-		return ubicacionGeografica;
-	}
-	public void setUbicacionGeografica(Ubicacion ubicacionGeografica) {
-		this.ubicacionGeografica = ubicacionGeografica;
-	}
+
 	public Long getId() {
 		return id;
 	}

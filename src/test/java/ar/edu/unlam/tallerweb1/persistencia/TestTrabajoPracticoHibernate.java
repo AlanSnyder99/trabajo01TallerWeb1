@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 
-import static org.junit.Assert.assertEquals;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
@@ -41,9 +40,11 @@ public class TestTrabajoPracticoHibernate extends SpringTest{
     	pais4.setNombre("pais4");
     	pais4.setIdioma("castellano");
     	getSession().save(pais4);    	
-    	List <Pais> miLista = getSession().createCriteria(Pais.class).add(Restrictions.like("idioma","ingles")).list();
+    	List <Pais> miLista = getSession()
+    			.createCriteria(Pais.class)
+    			.add(Restrictions.like("idioma","ingles")).list();
     	
-    	assertEquals(2,miLista.size(),0.01);
+    	assertThat(miLista).hasSize(2);
     }
     
     @Test
@@ -83,8 +84,11 @@ public class TestTrabajoPracticoHibernate extends SpringTest{
     	getSession().save(pais4);
     	
     	
-    	List <Pais> miLista2 = getSession().createCriteria(Pais.class).add(Restrictions.like("continente","europa")).list();
-    	assertEquals(2,miLista2.size(),0.01);
+    	List <Pais> miLista2 = getSession()
+    			.createCriteria(Pais.class)
+    			.add(Restrictions.like("continente","europa")).list();
+    	
+    	assertThat(miLista2).hasSize(2);
     }
     
     @Test
@@ -101,37 +105,43 @@ public class TestTrabajoPracticoHibernate extends SpringTest{
 
     	Pais pais3 = new Pais();
     	pais3.setNombre("pais3");
-    	
-    	Ubicacion ubicacion1 = new Ubicacion();
-    	ubicacion1.setLatitud(5);
-    	ubicacion1.setLongitud(5);
-    	
-    	Ubicacion ubicacion2 = new Ubicacion();
-    	ubicacion2.setLatitud(4);
-    	ubicacion2.setLongitud(5);
-    	
-    	Ubicacion ubicacion3 = new Ubicacion();
-    	ubicacion3.setLatitud(7);
-    	ubicacion3.setLongitud(6);
-    	
+    	  	
     	Ciudad ciudad1 = new Ciudad();
     	ciudad1.setNombre("mexico");
     	ciudad1.setPais(pais1);
-    	ciudad1.setUbicacionGeografica(ubicacion1);
-    	getSession().save(ciudad1);    	
-    	
+
     	Ciudad ciudad2 = new Ciudad();
     	ciudad2.setNombre("buenosAires");
     	ciudad2.setPais(pais2);
-    	ciudad2.setUbicacionGeografica(ubicacion2);
-    	getSession().save(ciudad2);   
     	
     	Ciudad ciudad3 = new Ciudad();
     	ciudad3.setNombre("Washington");
     	ciudad3.setPais(pais3);
-    	ciudad3.setUbicacionGeografica(ubicacion3);
-    	getSession().save(ciudad3);   
     	
+    	Ubicacion ubicacion1 = new Ubicacion();
+    	ubicacion1.setLatitud(5);
+    	ubicacion1.setLongitud(5);
+    	ubicacion1.setCiudad(ciudad1);
+    	getSession().save(ubicacion1);
     	
+    	Ubicacion ubicacion2 = new Ubicacion();
+    	ubicacion2.setLatitud(4);
+    	ubicacion2.setLongitud(5);
+    	ubicacion2.setCiudad(ciudad2);
+    	getSession().save(ubicacion2);
+    	
+    	Ubicacion ubicacion3 = new Ubicacion();
+    	ubicacion3.setLatitud(7);
+    	ubicacion3.setLongitud(6);
+    	ubicacion3.setCiudad(ciudad3);
+    	getSession().save(ubicacion3);
+    	
+    	List <Pais> miLista3 = getSession().createCriteria(Pais.class)
+    			.createAlias("ciudad","ciudadJoin")
+    			.createAlias("ciudadJoin.pais","paisBuscado")
+    			.add(Restrictions.gt("latitud",5))
+    			.add(Restrictions.gt("longitud",5)).list();
+    	
+    	assertThat(miLista3).hasSize(1);
     }
 }

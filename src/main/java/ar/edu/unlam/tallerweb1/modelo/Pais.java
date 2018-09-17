@@ -9,16 +9,15 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Pais {
-
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nombre;
 	private Integer habitantes;
 	private String idioma;
-	private String capital;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Continente continente;
 	
@@ -47,15 +46,7 @@ public class Pais {
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
 	}
-	public String getCapital() {
-		return capital;
-	}
-	public void setCapital(String capital) {
-		this.capital = capital;
-	}
-
-	
-	
+		
 	public Long getId() {
 		return id;
 	}

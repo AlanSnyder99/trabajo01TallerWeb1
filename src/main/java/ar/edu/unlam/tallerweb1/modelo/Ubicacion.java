@@ -1,9 +1,11 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ubicacion {
@@ -13,6 +15,9 @@ public class Ubicacion {
 	private Long id;
 	private Integer longitud;
 	private Integer latitud;
+	
+	@OneToOne (cascade = CascadeType.ALL)
+	private Ciudad ciudad;
 	
 	public Integer getLongitud() {
 		return longitud;
@@ -26,7 +31,11 @@ public class Ubicacion {
 	public void setLatitud(Integer latitud) {
 		this.latitud = latitud;
 	}
-	
-	
+	public Ciudad getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
+	}
 	
 }
