@@ -16,9 +16,6 @@ public class Ubicacion {
 	private Integer longitud;
 	private Integer latitud;
 	
-	@OneToOne (cascade = CascadeType.ALL)
-	private Ciudad ciudad;
-	
 	public Integer getLongitud() {
 		return longitud;
 	}
@@ -31,11 +28,11 @@ public class Ubicacion {
 	public void setLatitud(Integer latitud) {
 		this.latitud = latitud;
 	}
-	public Ciudad getCiudad() {
-		return ciudad;
+	public Long getId() {
+		return id;
 	}
-	public void setCiudad(Ciudad ciudad) {
-		this.ciudad = ciudad;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
+
 }

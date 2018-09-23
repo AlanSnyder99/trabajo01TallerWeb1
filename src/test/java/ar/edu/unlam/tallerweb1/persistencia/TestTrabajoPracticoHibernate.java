@@ -106,39 +106,40 @@ public class TestTrabajoPracticoHibernate extends SpringTest{
     	Pais pais3 = new Pais();
     	pais3.setNombre("pais3");
     	  	
-    	Ciudad ciudad1 = new Ciudad();
-    	ciudad1.setNombre("mexico");
-    	ciudad1.setPais(pais1);
-
-    	Ciudad ciudad2 = new Ciudad();
-    	ciudad2.setNombre("buenosAires");
-    	ciudad2.setPais(pais2);
-    	
-    	Ciudad ciudad3 = new Ciudad();
-    	ciudad3.setNombre("Washington");
-    	ciudad3.setPais(pais3);
-    	
     	Ubicacion ubicacion1 = new Ubicacion();
     	ubicacion1.setLatitud(5);
     	ubicacion1.setLongitud(5);
-    	ubicacion1.setCiudad(ciudad1);
-    	getSession().save(ubicacion1);
     	
     	Ubicacion ubicacion2 = new Ubicacion();
     	ubicacion2.setLatitud(4);
     	ubicacion2.setLongitud(5);
-    	ubicacion2.setCiudad(ciudad2);
-    	getSession().save(ubicacion2);
     	
     	Ubicacion ubicacion3 = new Ubicacion();
     	ubicacion3.setLatitud(7);
     	ubicacion3.setLongitud(6);
-    	ubicacion3.setCiudad(ciudad3);
-    	getSession().save(ubicacion3);
     	
+    	Ciudad ciudad1 = new Ciudad();
+    	ciudad1.setNombre("mexico");
+    	ciudad1.setPais(pais1);
+    	ciudad1.setUbicacionGeografica(ubicacion1);
+    	getSession().save(ciudad1);
+
+    	Ciudad ciudad2 = new Ciudad();
+    	ciudad2.setNombre("buenosAires");
+    	ciudad2.setPais(pais2);
+    	ciudad2.setUbicacionGeografica(ubicacion2);
+    	getSession().save(ciudad2);
+    	
+    	Ciudad ciudad3 = new Ciudad();
+    	ciudad3.setNombre("Washington");
+    	ciudad3.setPais(pais3);
+    	ciudad3.setUbicacionGeografica(ubicacion3);
+    	getSession().save(ciudad3);
+    	
+    	    	
     	List <Pais> miLista3 = getSession().createCriteria(Pais.class)
-    			.createAlias("ciudad","ciudadJoin")
-    			.createAlias("ciudadJoin.pais","paisBuscado")
+    			.createAlias("capital","capitalJoin")
+    			.createAlias("capitalJoin.ubicacionGeografica","capBuscada")
     			.add(Restrictions.gt("latitud",5))
     			.add(Restrictions.gt("longitud",5)).list();
     	

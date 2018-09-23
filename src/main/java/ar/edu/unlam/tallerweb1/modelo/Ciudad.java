@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -15,10 +16,18 @@ public class Ciudad {
 	private Long id;
 	private String nombre;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Pais pais;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Ubicacion ubicacionGeografica;
 	
+	public Ubicacion getUbicacionGeografica() {
+		return ubicacionGeografica;
+	}
+	public void setUbicacionGeografica(Ubicacion ubicacionGeografica) {
+		this.ubicacionGeografica = ubicacionGeografica;
+	}
 	public String getNombre() {
 		return nombre;
 	}
